@@ -84,4 +84,22 @@ public class GerenciadorEmprestimo {
         return true;
     }
 
+    public boolean verficarIdEmprestimo(int id) {
+        for(Emprestimo emps: emprestimos.values()) {
+            if(emps.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean devolverUmavez(int id) {
+        for(Emprestimo emps: emprestimos.values()) {
+            if(emps.getId() == id) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

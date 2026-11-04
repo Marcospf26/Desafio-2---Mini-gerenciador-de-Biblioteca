@@ -10,13 +10,7 @@ public class GerenciadorUsuarios {
         return false;
     }
     public boolean removerUsuario(int id) {
-        for(Usuario users: usuarios) {
-            if(users.getId() == id) {
-                usuarios.remove(users);
-                return true;
-            }
-        }
-        return false;
+        return usuarios.removeIf(users -> users.getId() == id);
     }
 
     public Usuario buscarPorMatricula(int matricula) {

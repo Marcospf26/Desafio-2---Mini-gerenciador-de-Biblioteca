@@ -26,13 +26,7 @@ public class GerenciadorLivros {
     }
 
     public boolean removerLivros(int id) {
-        for(Livro livs: livros) {
-            if(livs.getId() == id) {
-                livros.remove(livs);
-                return true;
-            }
-        }
-        return false;
+        return livros.removeIf(livs -> livs.getId() == id);
     }
 
     public Livro buscarLivroId(int id){

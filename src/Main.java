@@ -222,6 +222,14 @@ do {
                     System.out.println("Id do usuario.");
                     int idUsuarioEmprestimo = ler.nextInt();
 
+                    if(gerenciadorUsuarios.buscarPorID(idUsuarioEmprestimo)!=null) {
+
+                    } else {
+                        System.out.println(" Usuario nao encontrado.");
+                        break;
+
+                    }
+
                     System.out.println("Data do emprestimo.");
                     ler.nextLine();
                     String dataEmprestimoTXT = ler.nextLine();
@@ -248,10 +256,24 @@ do {
 
                     System.out.println(" Insira o id do emprestimo");
                     int idEmprestimo = ler.nextInt();
+
+                    if(gerenciadorEmprestimo.verficarIdEmprestimo(idEmprestimo)){
+
+                    } else {
+                        System.out.println(" Emprestimo nao encontrado");
+                        break;
+                    }
+
                     Emprestimo d = gerenciadorEmprestimo.procurarEmprestimoID(idEmprestimo);
-                    d.setDataDevolucao(LocalDate.now());
-                    gerenciadorLivros.devolverLivro(d.getLivro().getId());
-                    gerenciadorEmprestimo.removerEmprestimo(d);
+
+                    if(gerenciadorEmprestimo.devolverUmavez(idEmprestimo)) {
+                        d.setDataDevolucao(LocalDate.now());
+                        gerenciadorLivros.devolverLivro(d.getLivro().getId());
+                        gerenciadorEmprestimo.removerEmprestimo(d);
+                    } else {
+                        System.out.println("Nao foi possivel devolver");
+                    }
+
 
                     break;
                 case 3:
