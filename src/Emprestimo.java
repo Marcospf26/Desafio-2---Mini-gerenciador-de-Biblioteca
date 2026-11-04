@@ -37,6 +37,10 @@ public class Emprestimo {
         return dataDevolucao;
     }
 
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
     @Override
     public String toString() {
         return String.format("Id: %d  Nome do Livro %s  Nome do Usuario: %s  Data de Emprestimo %s", this.id, livro.getTitulo(), usuario.getNome(), dataEmprestimo);

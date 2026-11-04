@@ -25,6 +25,11 @@ public class Livro {
     }
 
 
+    public void aumentaExemplar(int quantidade) {
+        this.quantidadeExemplares += quantidade;
+    }
+
+
 
     public int getId() {
         return this.id;

@@ -67,6 +67,13 @@ do {
                         System.out.println(" Remover livros.");
                         System.out.println("Insira o ID");
                         int removerLivroId = ler.nextInt();
+                        if(gerenciadorEmprestimo.verificarLivroEmprestado(removerLivroId)) {
+
+
+                        } else {
+                            System.out.println("Livro nao pode ser removido pois tem emprestimos ativos com ele");
+                            break;
+                        }
                         if(gerenciadorLivros.removerLivros(removerLivroId)) {
                             System.out.println("Livro removido com sucesso");
                         } else {
@@ -160,6 +167,13 @@ do {
                     System.out.println("Insira o ID.");
                     int removerUserID = ler.nextInt();
 
+                    if(gerenciadorEmprestimo.verificarUsuarioTemEmprestimos(removerUserID)) {
+
+                    } else {
+                        System.out.println("Nao foi possivel realizar a operacao pois, o Usuario tem emprestimos ativos.");
+                        break;
+                    }
+
                     if(gerenciadorUsuarios.removerUsuario(removerUserID)) {
                         System.out.println("Usuario removido com sucesso");
                     } else {
@@ -214,7 +228,7 @@ do {
 
                     LocalDate dataEmprestimo = LocalDate.parse(dataEmprestimoTXT, fmt);
 
-                    if(gerenciadorEmprestimo.verificarQuantidadeEmprestimos(idLivroEmprestimo)) {
+                    if(gerenciadorEmprestimo.verificarQuantidadeEmprestimos(idUsuarioEmprestimo)) {
                         if(gerenciadorLivros.descontarLivroEmprestimo(idLivroEmprestimo)){
                             Emprestimo emprestimo = new Emprestimo(gerenciadorLivros.buscarLivroId(idLivroEmprestimo), gerenciadorUsuarios.buscarPorID(idUsuarioEmprestimo), dataEmprestimo);
                             gerenciadorEmprestimo.addList(emprestimo);
@@ -230,14 +244,30 @@ do {
 
                 break;
                 case 2:
-                    
-                break;
+                    System.out.println(" Devolver Livro");
+
+                    System.out.println(" Insira o id do emprestimo");
+                    int idEmprestimo = ler.nextInt();
+                    Emprestimo d = gerenciadorEmprestimo.procurarEmprestimoID(idEmprestimo);
+                    d.setDataDevolucao(LocalDate.now());
+                    gerenciadorLivros.devolverLivro(d.getLivro().getId());
+                    gerenciadorEmprestimo.removerEmprestimo(d);
+
+                    break;
                 case 3:
                     System.out.println(" Cosultar emprestimos ativos");
                     gerenciadorEmprestimo.listarEmprestimos();
                     break;
                 case 4:
-                break;
+                    System.out.println(" Consultar histórico de empréstimos de um usuário.");
+
+                    System.out.println(" Insira o id do usuario");
+                    int userIdEmprestimo = ler.nextInt();
+
+                    Usuario userEmprestimoConsulta = gerenciadorUsuarios.buscarPorID(userIdEmprestimo);
+                    gerenciadorEmprestimo.listarHistorico(userEmprestimoConsulta);
+
+                    break;
                 default:
                 break;
             }

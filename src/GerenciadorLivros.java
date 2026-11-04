@@ -73,4 +73,13 @@ public class GerenciadorLivros {
 
     }
 
+    public boolean devolverLivro(int idLivro) {
+        for(Livro livs : livros)
+            if (livs.getId() == idLivro) {
+                livs.aumentaExemplar(1);
+                return true;
+            }
+        return false;
+    }
+
 }
