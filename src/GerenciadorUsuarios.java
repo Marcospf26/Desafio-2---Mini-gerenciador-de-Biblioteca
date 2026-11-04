@@ -42,4 +42,14 @@ public class GerenciadorUsuarios {
         }
         return true;
     }
+
+    public Usuario buscarPorID(int id) {
+        for(Usuario users: usuarios) {
+            if(users.getId() == id) {
+                return users;
+            }
+        }
+        return null;
+    }
+
 }

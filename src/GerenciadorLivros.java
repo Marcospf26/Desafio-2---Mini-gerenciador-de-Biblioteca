@@ -60,4 +60,17 @@ public class GerenciadorLivros {
         }
         return null;
     }
+
+    public boolean descontarLivroEmprestimo(int idLivro) {
+        for(Livro livs : livros)
+            if (livs.getId() == idLivro) {
+                if (livs.descontaExemplar(1)) {
+                    return true;
+                }
+            }
+        return false;
+
+
+    }
+
 }

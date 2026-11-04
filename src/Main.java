@@ -7,7 +7,8 @@ Scanner ler = new Scanner(System.in);
 int x, y;
 GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
 GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios();
-
+GerenciadorEmprestimo gerenciadorEmprestimo = new GerenciadorEmprestimo();
+DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 do {
     System.out.println("1 - Gerenciar livros.");
@@ -190,6 +191,56 @@ do {
             }
         break;
         case 3:
+
+            System.out.println("1 - Realizar emprestimo.");
+            System.out.println("2 - Devolver Livro");
+            System.out.println("3 - Cosultar emprestimos ativos");
+            System.out.println("4 - Consultar histórico de empréstimos de um usuário.");
+            x = ler.nextInt();
+            ler.nextLine();
+            switch (x) {
+                case 1:
+                    System.out.println("Realizar emprestimo.");
+
+                    System.out.println("Id do livro.");
+                    int idLivroEmprestimo = ler.nextInt();
+
+                    System.out.println("Id do usuario.");
+                    int idUsuarioEmprestimo = ler.nextInt();
+
+                    System.out.println("Data do emprestimo.");
+                    ler.nextLine();
+                    String dataEmprestimoTXT = ler.nextLine();
+
+                    LocalDate dataEmprestimo = LocalDate.parse(dataEmprestimoTXT, fmt);
+
+                    if(gerenciadorEmprestimo.verificarQuantidadeEmprestimos(idLivroEmprestimo)) {
+                        if(gerenciadorLivros.descontarLivroEmprestimo(idLivroEmprestimo)){
+                            Emprestimo emprestimo = new Emprestimo(gerenciadorLivros.buscarLivroId(idLivroEmprestimo), gerenciadorUsuarios.buscarPorID(idUsuarioEmprestimo), dataEmprestimo);
+                            gerenciadorEmprestimo.addList(emprestimo);
+                            System.out.println("Emprestimo realizado com sucesso");
+
+                        } else {
+                            System.out.println("O livro nao esta disponivel");
+                        }
+                    } else {
+                        System.out.println("Usuario ja possui 3 ou mais livros emprestados");
+                    }
+
+
+                break;
+                case 2:
+                    
+                break;
+                case 3:
+                    System.out.println(" Cosultar emprestimos ativos");
+                    gerenciadorEmprestimo.listarEmprestimos();
+                    break;
+                case 4:
+                break;
+                default:
+                break;
+            }
         break;
         default:
         break;

@@ -16,6 +16,14 @@ public class Livro {
         this.quantidadeExemplares = quantidadeExemplares;
     }
 
+    public boolean descontaExemplar(int quantidade) {
+        if(quantidade > 0 && this.quantidadeExemplares - quantidade >= 0) {
+            this.quantidadeExemplares -= quantidade;
+            return true;
+        }
+        return false;
+    }
+
 
 
     public int getId() {
