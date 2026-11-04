@@ -68,14 +68,42 @@ do {
 
                     break;
                     case 3:
-                    break;
+                        System.out.println(" Buscar livros por ID.");
+                        System.out.println(" Insira o  ID.");
+                        int procurarLivroId = ler.nextInt();
+                        if(gerenciadorLivros.buscarLivroId(procurarLivroId) != null) {
+                            System.out.println(gerenciadorLivros.buscarLivroId(procurarLivroId));
+                        } else {
+                            System.out.println(" Livro nao encontrado.");
+                        }
+
+
+                        break;
                     case 4:
-                    break;
+                        System.out.println(" Buscar livros por título.");
+                        String procurarLivroTitulo = ler.nextLine();
+                        if(gerenciadorLivros.buscarLivroTitulo(procurarLivroTitulo) != null) {
+                            System.out.println(gerenciadorLivros.buscarLivroTitulo(procurarLivroTitulo));
+                        } else {
+                            System.out.println(" Livro nao encontrado.");
+                        }
+
+                        break;
                     case 5:
                         gerenciadorLivros.listarLivros();
                     break;
                     case 6:
-                    break;
+                        System.out.println(" Identificar livros pelo ISBN.");
+
+                        int procurarLivrosISBN = ler.nextInt();
+                        if(gerenciadorLivros.buscarLivroISBN(procurarLivrosISBN) != null) {
+                            System.out.println(gerenciadorLivros.buscarLivroISBN(procurarLivrosISBN));
+                        } else {
+                            System.out.println(" Livro nao encontrado.");
+                        }
+
+
+                        break;
                     default:
                     break;
 

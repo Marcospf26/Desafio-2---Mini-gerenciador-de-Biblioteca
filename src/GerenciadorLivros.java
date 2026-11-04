@@ -25,4 +25,30 @@ public class GerenciadorLivros {
         }
         return false;
     }
+
+    public Livro buscarLivroId(int id){
+        for(Livro livs: livros) {
+            if(livs.getId() == id) {
+                return livs;
+            }
+        }
+        return null;
+    }
+
+    public Livro buscarLivroTitulo(String titulo){
+        for(Livro livs: livros) {
+            if(livs.getTitulo().toLowerCase().replaceAll("\\s+", "").equals(titulo.toLowerCase().replaceAll("\\s+", ""))) {
+                return livs;
+            }
+        }
+        return null;
+    }
+    public Livro buscarLivroISBN(int isbn){
+        for(Livro livs: livros) {
+            if(livs.getIsbn() == isbn) {
+                return livs;
+            }
+        }
+        return null;
+    }
 }
