@@ -16,6 +16,8 @@ public class Livro {
         this.quantidadeExemplares = quantidadeExemplares;
     }
 
+
+
     public int getId() {
         return this.id;
     }

@@ -6,6 +6,7 @@ public static void main(String[] args) {
 Scanner ler = new Scanner(System.in);
 int x, y;
 GerenciadorLivros gerenciadorLivros = new GerenciadorLivros();
+GerenciadorUsuarios gerenciadorUsuarios = new GerenciadorUsuarios();
 
 
 do {
@@ -39,7 +40,15 @@ do {
                         String autorLivro = ler.nextLine();
 
                         System.out.println(" ISBN do livro.");
-                        int isbnLivro = ler.nextInt();
+                        int isbnLivro;
+
+                        do {
+
+                             isbnLivro = ler.nextInt();
+                            if(gerenciadorLivros.verficiadorISBN(isbnLivro) == false) {
+                                System.out.println("Esse isbn ja esta cadastrado no sistema");
+                            }
+                        }while(gerenciadorLivros.verficiadorISBN(isbnLivro) != true);
 
                         System.out.println(" Quantidade de exemplares.");
                         int qtdExemplares = ler.nextInt();
@@ -111,7 +120,74 @@ do {
             }while(x != 0);
         break;
         case 2:
+            System.out.println("1 - Cadastrar Usuario.");
+            System.out.println("2 - Remover usuario.");
+            System.out.println("3 - Buscar usuario por matricula.");
+            System.out.println("4 - Listar usuarios.");
+            x = ler.nextInt();
+            ler.nextLine();
+            switch (x) {
+                case 1:
+                    System.out.println(" Cadastrar Usuario.");
 
+                    System.out.println("1 - Nome.");
+                    String nomeUser = ler.nextLine();
+
+                    System.out.println("1 - Matricula.");
+                    int matriculaUser;
+                    do{
+                         matriculaUser = ler.nextInt();
+                         if(gerenciadorUsuarios.verificarMatricula(matriculaUser) != true) {
+                             System.out.println("Matricula ja existe");
+                        }
+                    }while (gerenciadorUsuarios.verificarMatricula(matriculaUser) != true);
+
+                    Usuario usuario = new Usuario(nomeUser, matriculaUser);
+                    if(gerenciadorUsuarios.addList(usuario)) {
+                        System.out.println("Usuario cadastrado com sucesso");
+                    } else {
+                        System.out.println("Nao foi possivel cadastrar o usuario");
+
+                    }
+
+
+
+                    break;
+                case 2:
+                    System.out.println("Remover usuario.");
+
+                    System.out.println("Insira o ID.");
+                    int removerUserID = ler.nextInt();
+
+                    if(gerenciadorUsuarios.removerUsuario(removerUserID)) {
+                        System.out.println("Usuario removido com sucesso");
+                    } else {
+                        System.out.println("Nao foi possivel remover o usuario");
+
+                    }
+
+                    break;
+                case 3:
+                    System.out.println(" Buscar usuario por matricula.");
+
+                    System.out.println("Insira a matricula.");
+                    int buscarUserMatricula = ler.nextInt();
+
+                    Usuario buscaUser = gerenciadorUsuarios.buscarPorMatricula(buscarUserMatricula);
+
+                    if(buscaUser != null) {
+                        System.out.println(buscaUser);
+                    } else {
+                        System.out.println("Nao foi possivel encontrar o usuario");
+                    }
+
+                    break;
+                case 4:
+                    gerenciadorUsuarios.listarUsers();
+                break;
+                default:
+                break;
+            }
         break;
         case 3:
         break;

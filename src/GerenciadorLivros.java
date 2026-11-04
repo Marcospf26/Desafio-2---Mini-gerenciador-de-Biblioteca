@@ -10,6 +10,15 @@ public class GerenciadorLivros {
         return false;
     }
 
+    public boolean verficiadorISBN(int isbn) {
+        for(Livro livs: livros) {
+            if(livs.getIsbn() == isbn) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void listarLivros() {
         for(Livro livs: livros) {
             System.out.println(livs);
